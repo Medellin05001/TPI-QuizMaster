@@ -19,28 +19,28 @@
 ?>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion</title>
-  <link rel="stylesheet" type="text/css" href="src/css/general.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.css" integrity="sha512-whyb3qZrPEJNH+Z7P4YpD27cQ4C44kFZxqrmlNVxNB13HZlB0qJ0Xv1LKshWjGjZGtPAf+W/J+aEck5FmCf/kw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
+<!-- Formulaire de connexion -->
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="text-center mb-4">Connexion</h2>
-      <form action="src/php/connexionSystem.php" method="POST">
+      <form method="POST">
         <div class="form-group">
-          <label>Login</label>
-          <input type="text" class="form-control" id="login" name="login" required>
+          <input type="text" class="form-control" id="nomUtilisateurInput" placeholder="Entrez le nom d'utilisateur" name="login">
+          <span class="erreur"><p id="erreur_nomUtilisateur"></p></span>
         </div>
         <div class="form-group">
-          <label>Mot de passe</label>
-          <input type="password" class="form-control" id="motDePasse" name="motDePasse" required>
+          <input type="password" class="form-control" id="motDePasseInput" placeholder="Entrez le mot de passe" name="motDePasse">
+          <span class="erreur"><p id="erreur_motDePasse"></p></span>
+          <span class="erreur"><p id="erreur_motDePasseRegex"></p></span>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" name="submit">Se connecter</button>
+        <button id ="connectSubmit"  type="button" class="btn btn-primary btn-block" name="submit">Se connecter</button>
+        <div style="color:red;" id="solde"></div>
       </form>
       <div class="text-center mt-3">
         <p>Vous n'avez pas encore de compte ?</p>
@@ -51,10 +51,5 @@
 </div>
 
 <?php require("src/html/footer.html"); ?>
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

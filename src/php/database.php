@@ -8,14 +8,12 @@
 
 
 class Database {
-
-
-    // Variable de classe
     private $connector;
 
+    /**
+     * Constructeur de la classe DB, il sert à tenter une connexion à la base de données
+     */
     public function __construct(){
-
-        // TODO: Se connecter via PDO et utilise la variable de classe $connector
         try{
             $this->connector = new PDO('mysql:host=localhost;dbname=quizzmaster', "root", "root");
         }catch(PDOException $err){
@@ -28,7 +26,6 @@ class Database {
     }
 
     private function queryPrepareExecute($query, $binds){
-        // TODO: permet de préparer, de binder et d’exécuter une requête (select avec where ou insert, update et delete)
         $req = $this->connector->prepare($query);
         for($i = 0;$i < count($binds); $i++)
         {
@@ -43,13 +40,26 @@ class Database {
     }
 
 
-    public function connect($NomUtilisateur){
-        $query = ("SELECT * FROM t_utilisateurs WHERE utiNomUtilisateur = :NomUtilisateur");
-        $binds = [['paramName' => 'NomUtilisateur', 'paramValue' => $NomUtilisateur, 'paramType' => PDO::PARAM_STR]];
+    /**
+     * Sélectionne l'utilisateur inséré en paramètre dans la base de donnée
+     * param $nomUtilisateur => Le nom d'utilisateur de l'utilisateur
+     * return les données de la base de données de l'utilisateur sélectionné
+     */
+    public function connect($nomUtilisateur){
+        $query = ("SELECT * FROM t_utilisateurs WHERE utiNomUtilisateur = :nomUtilisateur");
+        $binds = [['paramName' => 'nomUtilisateur', 'paramValue' => $nomUtilisateur, 'paramType' => PDO::PARAM_STR]];
         $statement = $this->queryPrepareExecute($query,$binds);
         return $this->formatData($statement);
     }
 
+    /**
+     * Créer l'utilisateur en fonction des données insérer
+     * param $login => Le nom d'utilisateur
+     * param $password => Le mot de passe de l'utilisateur
+     * param $nom => Le nom d'utilisateur
+     * param $prenom => Le prenom de l'utilisateur
+     * return les données de la base de données de l'utilisateur sélectionné
+     */
     public function addUser($login,$password,$nom,$prenom){
         $query = "INSERT INTO `t_utilisateurs` (`utiNomUtilisateur`, `utiMotDePasse`, `utiNom`, `utiPrenom`) VALUES (:login,:password,:nom,:prenom)";
         $binds = [
@@ -61,4 +71,14 @@ class Database {
         $statement = $this->queryPrepareExecute($query,$binds);
         return $this->formatData($statement);
     }
+
+    /**
+     * Permet d'obtenir le classement des 7 meilleurs joueurs
+     */
+    public function getRanking(){
+        $ranking = $this->querySimpleExecute("SELECT utiNom, utiPrenom, utiScore FROM `t_utilisateurs` ORDER BY utiScore DESC LIMIT 7");
+        return $this->formatData($ranking);
+    }
+
+    
 }

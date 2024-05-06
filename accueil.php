@@ -2,7 +2,7 @@
     ETML 
     Auteur		> Alexandre Fernandes 
     Date		> 06.05.2024
-    Description > Page de création de quiz
+    Description > Page de connexion
 -->
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,7 +19,7 @@
 ?>
 <head>
   <meta charset="UTF-8">
-  <title>Création quizz</title>
+  <title>Accueil</title>
 </head>
 <body>
 
