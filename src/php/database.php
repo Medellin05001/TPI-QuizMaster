@@ -73,12 +73,39 @@ class Database {
     }
 
     /**
-     * Permet d'obtenir le classement des 7 meilleurs joueurs
+     * Permet d'obtenir le classement des joueurs dans l'ordre
      */
     public function getRanking(){
-        $ranking = $this->querySimpleExecute("SELECT utiNom, utiPrenom, utiScore FROM `t_utilisateurs` ORDER BY utiScore DESC LIMIT 7");
+        // Exécute la première requête pour initialiser la variable @rank
+        $this->querySimpleExecute("SET @rank = 0");
+        
+        $ranking = $this->querySimpleExecute("
+            SELECT utiNomUtilisateur, utiNom, utiPrenom, utiScore, @rank := @rank + 1 AS position
+            FROM t_utilisateurs
+            ORDER BY utiScore DESC"
+        );
+    
         return $this->formatData($ranking);
+    }  
+
+    /**
+     * Permet d'obtenir les informations de bases de tout les quizz de la base de donnée
+     */
+    public function getAllQuizz(){
+        $quizzs = $this->querySimpleExecute("SELECT * FROM t_quizz INNER JOIN t_utilisateurs ON t_quizz.fkUtilisateurs = t_utilisateurs.idUtilisateurs");
+        return $this->formatData($quizzs);
     }
 
-    
+    /**
+     * Permet d'obtenir toutes les informations d'un quizz en particulier
+     * param $idquizz => id du quizz en question que l'on souhaite obtenir l'information
+     */
+    public function getQuizz($idQuizz){
+        $query = ("SELECT t_questions.idQuestions, t_questions.queTexte, t_reponses.idReponses, t_reponses.repTexte, t_quizz.idQuizz, t_quizz.quiTitre, t_utilisateurs.idUtilisateurs, t_utilisateurs.utiNomUtilisateur, t_utilisateurs.utiNom, t_utilisateurs.utiPrenom, t_utilisateurs.utiDroits, t_utilisateurs.utiScore FROM t_questions JOIN t_reponses ON t_questions.idQuestions = t_reponses.fkQuestions JOIN t_quizz ON t_questions.fkQuizz = t_quizz.idQuizz JOIN t_utilisateurs ON t_quizz.fkUtilisateurs = t_utilisateurs.idUtilisateurs WHERE t_quizz.idQuizz = :idQuizz;");
+        $binds = [
+            ["paramName" => "idQuizz", "paramValue" => $idQuizz, "paramType" => PDO::PARAM_INT]
+        ];
+        $statement = $this->queryPrepareExecute($query,$binds);
+        return $this->formatData($statement);
+    }
 }

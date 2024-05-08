@@ -6,18 +6,18 @@
 -->
 <!DOCTYPE html>
 <html lang="fr">
-<?php 
-    require("src/php/header.php");
-    //Si l'utilsateur est déja connecté il est redirigé
-    if(!isset($_SESSION["login"])){
-    ?>
-        <script>
-            window.location.replace("index.php");
-        </script>
-    <?php
-    }
-?>
 <head>
+    <?php 
+        require("src/php/header.php");
+        //Si l'utilsateur est déja connecté il est redirigé
+        if(!isset($_SESSION["login"])){
+        ?>
+            <script>
+                window.location.replace("index.php");
+            </script>
+        <?php
+        }
+    ?>
   <meta charset="UTF-8">
   <title>Création quizz</title>
 </head>

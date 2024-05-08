@@ -6,18 +6,18 @@
 -->
 <!DOCTYPE html>
 <html lang="fr">
-<?php 
-    require("src/php/header.php");
-    //Si l'utilsateur est déja connecté il est redirigé
-    if(!isset($_SESSION["login"])){
-    ?>
-        <script>
-            window.location.replace("index.php");
-        </script>
-    <?php
-    }
-?>
 <head>
+    <?php 
+        require("src/php/header.php");
+        //Si l'utilsateur est déja connecté il est redirigé
+        if(!isset($_SESSION["login"])){
+        ?>
+            <script>
+                window.location.replace("index.php");
+            </script>
+        <?php
+        }
+    ?>
   <meta charset="UTF-8">
   <title>Classement</title>
 </head>
@@ -25,38 +25,54 @@
     <?php
     // Données à afficher dans le tableau
     $ranking = $db->getRanking();
-    $counter = 1;
-    $insideCounter = 0;
-
+    $counter = 0;
     ?>
-    <div>
-        <?php
-        // Début du tableau HTML
-        echo "<table class ='table table-dark table-hover' border='1'>";
-
-        // Création du tableaau
-        foreach ($ranking as $row) {
-            echo "<tr>";
-            //Affiche toutes les données avec un numéro de positionnement uniquement avant le nom de famille
-            foreach ($row as $value) {
-                if($insideCounter == 0){
-                    echo "<td>$counter. | $value</td>";
-                    $counter++;
-                }else{
-                    echo "<td>$value</td>";
+    
+    <div class="container vertical-center">
+        <div class="table-container">
+        <h2 class="text-center mb-4">Classement</h2>
+            <table class ="table table-dark table-hover table-striped">
+                <?php
+                // Création du tableaau
+                foreach ($ranking as $row) {
+                    // Stocke la position de l'utilisateur connecté dans une variable lorsque ses données seront scannés
+                    if ($utilisateur[0]['utiNomUtilisateur'] == $row['utiNomUtilisateur']){
+                        $positionUtilisateur = $row['position'];
+                    }
+                    // Permet l'affichage uniquement des 7 premiers joueurs
+                    if ($counter < 7){
+                        echo "<tr>";
+                        echo "<td>" . $row['position'] . ". " . $row['utiNom'] . "</td>";
+                        echo "<td>" . $row['utiPrenom'] . "</td>";
+                        echo "<td> | " . $row['utiScore'] . " Points" . "</td>";
+                        echo "</tr>";
+                        $counter++;
+                    }
                 }
-                if($insideCounter == 2){
-                $insideCounter = 0;
-                }else{
-                    $insideCounter++;
-                }
-            }
-            echo "</tr>";
-        }
-
-        echo "</table>";
-        ?>
+                ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invisibleTexte">.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php
+                        echo("Votre score : " . $utilisateur[0]['utiScore']);
+                        ?>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <?php echo("votre position : " . $positionUtilisateur); ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-<?php require("src/html/footer.html"); ?>
+        
 </body>
+<footer>
+  <?php require("src/html/footer.html"); ?>
+</footer>
 </html>

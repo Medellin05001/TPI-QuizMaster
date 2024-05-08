@@ -1,7 +1,7 @@
 <!-- 
     ETML 
     Auteur      > Alexandre Fernandes 
-    Date        > 22.01.2024
+    Date        > 06.01.2024
     Description > Page de redirection en cas de problème
 --> 
 <?php

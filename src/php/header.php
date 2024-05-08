@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Connexion à bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- <link rel = "icon" href ="resources/images/logo.ico" type = "image/x-icon"> -->
+     <link rel = "icon" href ="resources/images/favIcon.png" type = "image/x-icon">
 </head>
 <?php
     // Vérifie si l'utilisateur est connecter
@@ -34,18 +34,24 @@
 ?>
 
 <!-- La balise nav ci-dessous est affichée (Si utilisateur connecté) -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-width">
   <div class="container">
-    <a class="navbar-brand" href="accueil.php">QuizzMatser</a>
+    <a class="navbar-brand" href="accueil.php"><img class="logo" src="resources/images/logo.png"></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <!-- Si l'utilisateur se trouve dans la page accueil.php, le mot accueil sera mis en évidence-->
         <li class="nav-item <?php if($file == 'accueil.php'){echo " active";}?>">
           <a class="nav-link" href="accueil.php">Accueil</a>
         </li>
+        <?php
+        if ($utilisateur[0]['utiDroits'] == 'admin'){
+          ?>
         <li class="nav-item <?php if($file == 'creationQuizz.php'){echo " active";}?>">
           <a class="nav-link" href="creationQuizz.php">Créer quizz</a>
         </li>
+        <?php
+        }
+        ?>
         <li class="nav-item <?php if($file == 'classement.php'){echo " active";}?>">
           <a class="nav-link" href="classement.php">Classement</a>
         </li>
