@@ -4,6 +4,7 @@
  * Date : 06.05.2024
  * Description : Traite les données d'authentification
  */
+
 $(document).ready(function() {
     /**
      * Traitement des données de connexion
@@ -117,4 +118,49 @@ $(document).ready(function() {
             });
         }
     });
+
 });
+
+var counter = 1;
+
+function ajouterInput() {
+    //Défini où ajouter les éléments suivants
+    var container = document.getElementById("inputs_container");
+
+    //Div row
+    var rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+
+    //Div col pour question
+    var colDivQuestion = document.createElement("div");
+    colDivQuestion.classList.add("col");
+
+    //Div col pour reponse
+    var colDivReponse = document.createElement("div");
+    colDivReponse.classList.add("col");
+
+    //Input question
+    var question = document.createElement("input");
+    question.classList.add("form-control");
+    question.type = "text";
+    question.name = "question" + counter;
+    question.placeholder = "Question"
+
+    //Input reponse
+    var reponse = document.createElement("input");
+    reponse.classList.add("form-control");
+    reponse.type = "text";
+    reponse.name = "reponse" + counter;
+    reponse.placeholder = "Reponse"
+
+    //Défini les parents de chaque éléments
+    container.appendChild(document.createElement("br"));
+    colDivReponse.appendChild(reponse);
+    colDivQuestion.appendChild(question);
+    rowDiv.appendChild(colDivQuestion);
+    rowDiv.appendChild(colDivReponse);
+    container.appendChild(rowDiv);
+
+    // Finalisations
+    counter++;
+}

@@ -9,13 +9,13 @@
 <head>
     <?php 
         require("src/php/header.php");
-        //Si l'utilsateur est déja connecté il est redirigé
+        //Si l'utilsateur n'est pas connecté il est redirigé
         if(!isset($_SESSION["login"])){
-        ?>
-            <script>
-                window.location.replace("index.php");
-            </script>
-        <?php
+            ?>
+                <script>
+                    window.location.replace("index.php");
+                </script>
+            <?php
         }
     ?>
   <meta charset="UTF-8">
@@ -28,7 +28,7 @@
     $counter = 0;
     ?>
     
-    <div class="container vertical-center">
+    <div class="container">
         <div class="table-container">
         <h2 class="text-center mb-4">Classement</h2>
             <table class ="table table-dark table-hover table-striped">

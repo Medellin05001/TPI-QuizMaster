@@ -9,13 +9,13 @@
 <head>
     <?php 
         require("src/php/header.php");
-        //Si l'utilsateur est déja connecté il est redirigé
+        //Si l'utilsateur n'est pas connecté il est redirigé
         if(!isset($_SESSION["login"])){
-        ?>
-            <script>
-                window.location.replace("index.php");
-            </script>
-        <?php
+            ?>
+                <script>
+                    window.location.replace("index.php");
+                </script>
+            <?php
         }
         $quizzs = $db->getAllQuizz();
     ?>
@@ -29,6 +29,7 @@
         <div class="container mt-5">
             <div class="row">
                 <?php
+                    // Affichage de tout les quizz, du plus récent au plus vieux
                     foreach($quizzs as $quizz){
                         ?>
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">

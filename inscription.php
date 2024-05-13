@@ -1,7 +1,7 @@
 <!-- 
     ETML 
-    Auteur		> Alexandre Fernandes 
-    Date		> 03.05.2024
+    Auteur		  > Alexandre Fernandes 
+    Date		    > 03.05.2024
     Description > Page d'inscription
 -->
 
@@ -12,11 +12,11 @@
       require("src/php/header.php");
       //Si l'utilsateur est déja connecté il est redirigé
       if(isset($_SESSION["login"])){
-      ?>
-          <script>
-              window.location.replace("index.php");
-          </script>
-      <?php
+        ?>
+            <script>
+                window.location.replace("index.php");
+            </script>
+        <?php
       }
   ?>
   <meta charset="UTF-8">

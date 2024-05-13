@@ -36,7 +36,7 @@
         $score = 0;
         foreach ($reponsesAttendues as $key => $reponseAttendue) {
             if(isset($reponsesUtilisateur["reponse".$key+1])) {
-                if($reponsesUtilisateur["reponse".$key+1] === $reponseAttendue){
+                if(strtolower($reponsesUtilisateur["reponse".$key+1]) === strtolower($reponseAttendue)){
                     $score++;
                 }else{
                     if($score > 0){
@@ -46,7 +46,11 @@
             }
         }
 
-        echo $score;
+        // Ajout des données dans des variables sessions afin de les réutiliser dans d'autres pages
+        $_SESSION['score'] = $score;
+        $_SESSION['reponses_utilisateur'] = $reponsesUtilisateur;
+        header("Location: ../../quizz.php?id=". $_POST['idQuizz'] .".php");
+        exit;
 
     }else{
         header("Location: ../../index.php");

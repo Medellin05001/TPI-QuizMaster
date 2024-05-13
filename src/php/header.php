@@ -1,7 +1,7 @@
 <!-- 
     ETML 
-    Auteur		> Alexandre Fernandes 
-    Date		> 03.05.2024
+    Auteur	  	> Alexandre Fernandes 
+    Date		    > 03.05.2024
     Description > header, liaison avec divers script, css qui permettent le bon fonctionnement de l'application
 -->
 
@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Connexion à bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <link rel = "icon" href ="resources/images/favIcon.png" type = "image/x-icon">
+    <link rel = "icon" href ="resources/images/favIcon.png" type = "image/x-icon">
 </head>
 <?php
     // Vérifie si l'utilisateur est connecter
