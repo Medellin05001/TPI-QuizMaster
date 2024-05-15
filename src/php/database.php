@@ -110,16 +110,26 @@ class Database {
         return $this->formatData($statement);
     }
 
-    public function addScore($score, $username){
-        $query = ("UPDATE `t_utilisateurs` SET `utiScore` = `utiScore` + :score WHERE utiNomUtilisateur = :username");
+    /**
+     * Permet d'ajouter un score à un utilisateur
+     * param $score => score à additioner à son score actuel
+     * param $idUtilisateur => id de l'utilisateur qui reçoit un nouveau score
+     */
+    public function addScore($score, $idUtilisateur){
+        $query = ("UPDATE `t_utilisateurs` SET `utiScore` = `utiScore` + :score WHERE idUtilisateurs = :idUtilisateur");
         $binds = [
             ["paramName" => "score", "paramValue" => $score, "paramType" => PDO::PARAM_INT],
-            ["paramName" => "username", "paramValue" => $username, "paramType" => PDO::PARAM_STR]
+            ["paramName" => "idUtilisateur", "paramValue" => $idUtilisateur, "paramType" => PDO::PARAM_INT]
         ];
         $statement = $this->queryPrepareExecute($query,$binds);
         return $this->formatData($statement);
     }
 
+    /**
+     * Permet de créer un quizz (uniquement pour la table t_quizz)
+     * param $titre => Titre du quizz
+     * param $idUtilisateur => id de l'utilisateur qui créer le quizz (clé étrangère)
+     */
     public function createQuizz($titre, $idUtilisateur){
         $query = ("INSERT INTO t_quizz (quiTitre, fkUtilisateurs) VALUES (:titre, :idUtilisateur)");
         $binds = [
@@ -130,11 +140,11 @@ class Database {
         return $this->formatData($statement);
     }
 
-    public function getLastId(){
-        $lastId = $this->querySimpleExecute("SELECT LAST_INSERT_ID() AS id;");
-        return $this->formatData($lastId);
-    }
-
+    /**
+     * Permet de créer un quizz (uniquement pour la table t_question)
+     * param $texte => texte qui sera la question
+     * param $idQuizz => id du quizz relier à cette question (clé étrangère)
+     */
     public function createQuestion($texte, $idQuizz){
         $query = ("INSERT INTO t_questions (queTexte, fkQuizz) VALUES (:texte, :idQuizz)");
         $binds = [
@@ -145,6 +155,11 @@ class Database {
         return $this->formatData($statement);
     }
 
+    /**
+     * Permet de créer un quizz (uniquement pour la table t_reponse)
+     * param $texte => texte de la réponse
+     * param $idQuestion => id de la question relier à cette réponse (clé étrangère)
+     */
     public function createReponse($texte, $idQuestion){
         $query = ("INSERT INTO t_reponses (repTexte, fkQuestions) VALUES (:texte, :idQuestion)");
         $binds = [
@@ -153,5 +168,13 @@ class Database {
         ];
         $statement = $this->queryPrepareExecute($query,$binds);
         return $this->formatData($statement);
+    }
+
+    /**
+     * Permet d'obtenir l'id du dernier élément créer dans la base de donnée
+     */
+    public function getLastId(){
+        $lastId = $this->querySimpleExecute("SELECT LAST_INSERT_ID() AS id;");
+        return $this->formatData($lastId);
     }
 }

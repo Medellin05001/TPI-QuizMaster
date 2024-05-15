@@ -74,7 +74,9 @@
                     }
 
                     echo "Total : ".$NmbreBonnesReponses."/".($counter-1). " <br>";
-                    $db->addScore($score, $_SESSION["login"]);
+                    if($score != 0){
+                        $db->addScore($score, $utilisateur[0]["idUtilisateurs"]);
+                    }
                     echo "Votre nouveau score de classement général est de " . $utilisateur[0]['utiScore']+$score . " points (+" . $score . " points)";
                     ?>
                 </form>

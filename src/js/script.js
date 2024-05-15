@@ -2,9 +2,10 @@
  * ETML
  * Auteur : Alexandre Fernandes
  * Date : 06.05.2024
- * Description : Traite les données d'authentification
+ * Description : Traite les données php afin de renvoyer des erreures si nécessaire
  */
 
+// Permet de charger le javascript uniquement quand c'est demander
 $(document).ready(function() {
     /**
      * Traitement des données de connexion
@@ -119,48 +120,42 @@ $(document).ready(function() {
         }
     });
 
+    var counter = 1;
+
+    $("#addInput").click(function() {
+        // Défini où ajouter les éléments suivants
+        var container = $("#inputs_container");
+
+        // Div row
+        var rowDiv = $("<div>").addClass("row");
+
+        // Div col pour question
+        var colDivQuestion = $("<div>").addClass("col");
+
+        // Div col pour réponse
+        var colDivReponse = $("<div>").addClass("col");
+
+        // Input question
+        var question = $("<input>").addClass("form-control").attr({
+            type: "text",
+            name: "question" + counter,
+            placeholder: "Question"
+        });
+
+        // Input réponse
+        var reponse = $("<input>").addClass("form-control").attr({
+            type: "text",
+            name: "reponse" + counter,
+            placeholder: "Réponse"
+        });
+
+        // Défini les parents de chaque éléments
+        container.append("<br>").append(rowDiv);
+        rowDiv.append(colDivQuestion).append(colDivReponse);
+        colDivQuestion.append(question);
+        colDivReponse.append(reponse);
+
+        // Finalisations
+        counter++;
+    });
 });
-
-var counter = 1;
-
-function ajouterInput() {
-    //Défini où ajouter les éléments suivants
-    var container = document.getElementById("inputs_container");
-
-    //Div row
-    var rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
-
-    //Div col pour question
-    var colDivQuestion = document.createElement("div");
-    colDivQuestion.classList.add("col");
-
-    //Div col pour reponse
-    var colDivReponse = document.createElement("div");
-    colDivReponse.classList.add("col");
-
-    //Input question
-    var question = document.createElement("input");
-    question.classList.add("form-control");
-    question.type = "text";
-    question.name = "question" + counter;
-    question.placeholder = "Question"
-
-    //Input reponse
-    var reponse = document.createElement("input");
-    reponse.classList.add("form-control");
-    reponse.type = "text";
-    reponse.name = "reponse" + counter;
-    reponse.placeholder = "Reponse"
-
-    //Défini les parents de chaque éléments
-    container.appendChild(document.createElement("br"));
-    colDivReponse.appendChild(reponse);
-    colDivQuestion.appendChild(question);
-    rowDiv.appendChild(colDivQuestion);
-    rowDiv.appendChild(colDivReponse);
-    container.appendChild(rowDiv);
-
-    // Finalisations
-    counter++;
-}

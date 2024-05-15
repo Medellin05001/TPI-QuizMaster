@@ -51,6 +51,7 @@
                 }
                 ?>
                 <tr>
+                    <!-- Ligne vide afin de séparer le score personnel et général--> 
                     <td></td>
                     <td></td>
                     <td class="invisibleTexte">.</td>

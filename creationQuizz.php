@@ -54,7 +54,7 @@
                 </div>
                 <input type="hidden" name="idUtilisateur" value="<?php echo $utilisateur[0]['idUtilisateurs']; ?>">
 
-                <button type="button" class="btn btn-primary btn-block" onclick="ajouterInput()">Ajouter une question</button>
+                <button type="button" class="btn btn-primary btn-block" name="submit" id="addInput">Ajouter une question</button>
                 <button type="submit" class="btn btn-primary btn-block" name="submit" id="createSubmit">Création du quizz</button>
             </form>
         </div>
