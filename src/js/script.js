@@ -31,7 +31,7 @@ $(document).ready(function() {
             validationInput++;
         }
 
-        // i toutes les données introduites sont correctes, il les renvoies en paramètres POST dans la page qui gère tout la suite de la connexion
+        // Si toutes les données introduites sont correctes, il les renvoies en paramètres POST dans la page qui gère tout la suite de la connexion
         if (validationInput === 2) {
             $.ajax({
                 method: "POST", 
@@ -55,7 +55,7 @@ $(document).ready(function() {
         if (nom == ""){
             $("#erreur_nom").html("Veuillez entrer un nom !");
         } else {
-            if(!nom.match(/^[a-zA-Z0-9-]{3,50}$/)){
+            if(!nom.match(/^[a-zA-Z-]{3,50}$/)){
                 $("#erreur_nom").html("Le nom doit comporter au minimum 3 charactères et au maximum 50 (Lettres et \"-\" uniquement)!");
             }else{
                 $("#erreur_nom").html("");
@@ -68,7 +68,7 @@ $(document).ready(function() {
         if (prenom == "") {
             $("#erreur_prenom").html("Veuillez entrer un prenom !");
         } else {
-            if(!prenom.match(/^[a-zA-Z0-9-]{3,35}$/)){
+            if(!prenom.match(/^[a-zA-Z-]{3,35}$/)){
                 $("#erreur_prenom").html("Le prenom doit comporter au minimum 3 charactères et au maximum 35 (Lettres et \"-\" uniquement) !");
             }else{
                 $("#erreur_prenom").html("");

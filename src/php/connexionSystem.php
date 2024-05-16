@@ -27,7 +27,7 @@
         if($utilisateur = $db->connect($username)){
             $hashedPassword = hash('sha256', $password);
 
-            // Vérifie si l'utilisateur et le mot de passe introduit corresponde
+            // Vérifie si l'utilisateur et le mot de passe introduit correspondent
             if ($utilisateur[0]['utiMotDePasse'] == $hashedPassword){
                 $_SESSION["login"] = $username;
                 echo $indexRedirection;
