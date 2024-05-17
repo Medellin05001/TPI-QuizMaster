@@ -29,12 +29,17 @@
                 if (strpos($key, 'question') === 0) {
                     $questionNumber = substr($key, 8);
 
-                    // Vérifier si la question est vide, si oui -> question ajoutée | si non -> question supprimée du tableau
-                    if (empty(trim($value)) || !ctype_alnum($value)) {
+                    // Vérifier si la question est vide, si nom -> question ajoutée | si oui -> question supprimée du tableau
+                    if (empty(trim($value))) {
                         unset($questionsUtilisateur[$key]);
                         unset($reponsesUtilisateurs['reponse' . $questionNumber]);
                     } else {
-                        $questionsUtilisateur[$key] = $value;
+                        if(preg_match("/^[\p{L}0-9\s]{1,255}$/u", $value)){
+                            $questionsUtilisateur[$key] = $value;
+                        }else{
+                            unset($questionsUtilisateur[$key]);
+                            unset($reponsesUtilisateurs['reponse' . $questionNumber]);
+                        }
                     }
                 }
 
@@ -42,11 +47,17 @@
                 if (strpos($key, 'reponse') === 0) {
                     $reponseNumber = substr($key, 7);
 
-                    // Vérifier si la réponse est vide, si oui -> question ajoutée | si non -> question supprimée du tableau
-                    if (!empty(trim($value))  || !ctype_alnum($value)) {
-                        $reponsesUtilisateurs[$key] = $value;
-                    } else {
+                    // Vérifier si la réponse est vide, si non -> question ajoutée | si oui -> question supprimée du tableau
+                    if (empty(trim($value))) {
+                        unset($reponsesUtilisateurs[$key]);
                         unset($questionsUtilisateur['question' . $reponseNumber]);
+                    } else {
+                        if(preg_match("/^[\p{L}0-9\s]{1,255}$/u", $value)){
+                            $reponsesUtilisateurs[$key] = $value;
+                        }else{
+                            unset($reponsesUtilisateurs[$key]);
+                            unset($questionsUtilisateur['question' . $questionNumber]);
+                        }
                     }
                 }
             }
@@ -59,12 +70,19 @@
                 }
             }
 
+            // Vérifie s'il y a plus de 0 question/réponse
             if(count($reponsesUtilisateurs) !== 0){
+
+                //Création quizz
                 $db->createQuizz($nomQuizz,$idUtilisateur);
                 $idQuizz = $db->getLastId();
                 foreach($questionsUtilisateur as $key=>$value){
+
+                    //Création question
                     $db->createQuestion($value,$idQuizz[0]['id']);
                     $idQuestion = $db->getLastId();
+
+                    // Création reponse
                     $key = str_replace('question','reponse',$key);
                     $db->createReponse($reponsesUtilisateurs[$key], $idQuestion[0]['id']);
                 }

@@ -39,11 +39,14 @@
                 if(strtolower($reponsesUtilisateur["reponse".$key+1]) === strtolower($reponseAttendue)){
                     $score++;
                 }else{
-                    if($score > 0){
                         $score--;
-                    }
                 }
             }
+        }
+
+        // $score devient 0 si l'utilisateur à un score négatif
+        if($score < 0){
+            $score = 0;
         }
 
         // Ajout des données dans des variables sessions afin de les réutiliser dans d'autres pages

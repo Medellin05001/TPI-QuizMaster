@@ -43,7 +43,7 @@
     <div id="quizz-container">
         <!-- Form après réponses-->
         <?php
-            // Vérification si l'utilisateur est connecté
+            // Vérification si l'utilisateur contient des réponse d'un quiz
             if (isset($_SESSION['score']) && isset($_SESSION['reponses_utilisateur'])) {
                 $reponsesUtilisateur = $_SESSION['reponses_utilisateur'];
                 $score = $_SESSION['score'];
@@ -60,14 +60,15 @@
 
                         // Vérifier si la réponse de l'utilisateur pour cette question existe
                         if(isset($reponsesUtilisateur["reponse".$counter]) && str_replace(' ', '',$reponsesUtilisateur["reponse".$counter]) != "") {
-                            echo "<br><label> Votre réponse : " . $reponsesUtilisateur["reponse".$counter] . "</label>";
+                            // Calcul du nombre de réponses juste sur le total de réponses et affichage des réponses dans le format correct
+                            if($question['repTexte'] === $reponsesUtilisateur["reponse".$counter]){                    
+                                $NmbreBonnesReponses++;
+                                echo "<br><label style='color:green'> Votre réponse : " . $reponsesUtilisateur["reponse".$counter] . "</label>";
+                            }else{
+                                echo "<br><label style='color:red;'> Votre réponse : " . $reponsesUtilisateur["reponse".$counter] . "</label>";
+                            }
                         } else {
-                            echo "<br><label>Aucune réponse</label>";
-                        }
-                    
-                        // Calcul du nombre de réponses juste sur le total de réponses
-                        if($question['repTexte'] === $reponsesUtilisateur["reponse".$counter]){                    
-                            $NmbreBonnesReponses++;
+                            echo "<br><label style='color:red'>Aucune réponse</label>";
                         }
                         echo "</div><hr>";
                         $counter++;
