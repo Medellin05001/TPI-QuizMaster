@@ -18,7 +18,7 @@
 
     // Vérifier si l'utilisateur est bien passer par le formulaire de quizz pour venir sur cette page
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(preg_match("/^[\p{L}0-9\s]{1,50}$/u", $nomQuizz)) {
+        if(preg_match("/^[\p{L}0-9\s\?]{1,50}$/u", $nomQuizz)) {
 
             $reponsesUtilisateurs = [];
             $questionsUtilisateur = [];
@@ -34,9 +34,10 @@
                         unset($questionsUtilisateur[$key]);
                         unset($reponsesUtilisateurs['reponse' . $questionNumber]);
                     } else {
-                        if(preg_match("/^[\p{L}0-9\s]{1,255}$/u", $value)){
+                        if(preg_match("/^[\p{L}0-9\s\?'']{1,255}$/u", $value)){
                             $questionsUtilisateur[$key] = $value;
                         }else{
+                            echo $value;
                             unset($questionsUtilisateur[$key]);
                             unset($reponsesUtilisateurs['reponse' . $questionNumber]);
                         }
@@ -52,7 +53,7 @@
                         unset($reponsesUtilisateurs[$key]);
                         unset($questionsUtilisateur['question' . $reponseNumber]);
                     } else {
-                        if(preg_match("/^[\p{L}0-9\s]{1,255}$/u", $value)){
+                        if(preg_match("/^[\p{L}0-9\s\?'']{1,255}$/u", $value)){
                             $reponsesUtilisateurs[$key] = $value;
                         }else{
                             unset($reponsesUtilisateurs[$key]);
@@ -71,7 +72,7 @@
             }
 
             // Vérifie s'il y a plus de 0 question/réponse
-            if(count($reponsesUtilisateurs) !== 0){
+            if(count($reponsesUtilisateurs) != 0){
 
                 //Création quizz
                 $db->createQuizz($nomQuizz,$idUtilisateur);

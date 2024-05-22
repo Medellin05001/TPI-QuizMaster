@@ -93,7 +93,7 @@ class Database {
      * Permet d'obtenir les informations de bases de tout les quizz de la base de donnée
      */
     public function getAllQuizz(){
-        $quizzs = $this->querySimpleExecute("SELECT * FROM t_quizz INNER JOIN t_utilisateurs ON t_quizz.fkUtilisateurs = t_utilisateurs.idUtilisateurs");
+        $quizzs = $this->querySimpleExecute("SELECT * FROM t_quizz INNER JOIN t_utilisateurs ON t_quizz.fkUtilisateurs = t_utilisateurs.idUtilisateurs ORDER BY t_quizz.idQuizz DESC");
         return $this->formatData($quizzs);
     }
 
@@ -123,6 +123,37 @@ class Database {
         ];
         $statement = $this->queryPrepareExecute($query,$binds);
         return $this->formatData($statement);
+    }
+
+    /**
+     * Permet de supprimer un quizz
+     * La fonction beginTransaction permet d'annuler toutes les opérations grâce à rollBack si un soucis est présent
+     * param $idQuizz => id du quizz que l'on veut supprimer
+     */
+    public function deleteQuizz($quizzId){
+        try {
+            $this->connector->beginTransaction();
+
+            // Suppression reponses
+            $query = "DELETE t_reponses FROM t_reponses 
+                      JOIN t_questions ON t_reponses.fkQuestions = t_questions.idQuestions 
+                      WHERE t_questions.fkQuizz = :quizzId";
+            $binds = [["paramName" => "quizzId", "paramValue" => $quizzId, "paramType" => PDO::PARAM_INT]];
+            $this->queryPrepareExecute($query, $binds);
+
+            // Suppression questions
+            $query = "DELETE FROM t_questions WHERE fkQuizz = :quizzId";
+            $this->queryPrepareExecute($query, $binds);
+
+            // Suppression Quizz
+            $query = "DELETE FROM t_quizz WHERE idQuizz = :quizzId";
+            $this->queryPrepareExecute($query, $binds);
+
+            $this->connector->commit();
+        } catch (Exception $e) {
+            $this->connector->rollBack();
+            throw $e;
+        }
     }
 
     /**

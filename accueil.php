@@ -37,6 +37,9 @@
                                     <div class="card bg-dark text-white">
                                         <div class="card-body text-center">
                                             <h5 class="card-title"><?php echo($quizz['quiTitre']); ?></h5>
+                                            <?php if($utilisateur[0]['utiDroits'] == 'admin'){
+                                                echo "<h6 class='card-subtitle'><a onclick='question(".$quizz['idQuizz'].")' href='#'>Supprimer Quizz</a></h6>";
+                                            }  ?>
                                         </div>
                                         <div class="card-footer">
                                             <p class="card-text card-text-small">Par : <?php echo($quizz['utiNom']." ".$quizz['utiPrenom']); ?></p>

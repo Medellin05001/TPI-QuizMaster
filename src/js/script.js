@@ -159,3 +159,10 @@ $(document).ready(function() {
         counter++;
     });
 });
+
+function question(id){
+    if (confirm('Etes-vous sûr de vouloir supprimer ce quizz ?')) {
+        //Si oui
+        window.location.replace("src/php/suppressionQuizz.php?id="+id+"");
+      }
+}
