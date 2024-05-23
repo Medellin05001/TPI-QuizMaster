@@ -34,7 +34,7 @@
                         unset($questionsUtilisateur[$key]);
                         unset($reponsesUtilisateurs['reponse' . $questionNumber]);
                     } else {
-                        if(preg_match("/^[\p{L}0-9\s\?'']{1,255}$/u", $value)){
+                        if(preg_match("/^[\p{L}0-9\s\?'\",]{1,255}$/u", $value)){
                             $questionsUtilisateur[$key] = $value;
                         }else{
                             echo $value;
@@ -53,7 +53,7 @@
                         unset($reponsesUtilisateurs[$key]);
                         unset($questionsUtilisateur['question' . $reponseNumber]);
                     } else {
-                        if(preg_match("/^[\p{L}0-9\s\?'']{1,255}$/u", $value)){
+                        if(preg_match("/^[\p{L}0-9\s\?'\",]{1,255}$/u", $value)){
                             $reponsesUtilisateurs[$key] = $value;
                         }else{
                             unset($reponsesUtilisateurs[$key]);

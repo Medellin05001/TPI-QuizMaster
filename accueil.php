@@ -4,11 +4,11 @@
     Date		> 08.05.2024
     Description > Page d'accueil
 -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <?php 
-        require("src/php/header.php");
+<?php require("src/php/head.php"); ?>
+  <title>Accueil</title>
+</head>
+<body>
+    <?php require("src/php/header.php");
         //Si l'utilsateur n'est pas connecté il est redirigé
         if(!isset($_SESSION["login"])){
             ?>
@@ -19,10 +19,6 @@
         }
         $quizzs = $db->getAllQuizz();
     ?>
-  <meta charset="UTF-8">
-  <title>Accueil</title>
-</head>
-<body>
     <div class="custom-width">
         Bienvenue : <?php echo($utilisateur[0]['utiPrenom']." ".$utilisateur[0]['utiNom']." (".$utilisateur[0]['utiNomUtilisateur'].")");?>
         <h2 class="text-center mb-4">Quizz récents</h2>    
@@ -53,8 +49,6 @@
             </div>
         </div>
     </div>
-</body>
-<footer>
     <?php require("src/html/footer.html"); ?>
-</footer>
+</body>
 </html>

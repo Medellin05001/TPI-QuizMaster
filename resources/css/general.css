@@ -1,5 +1,5 @@
 body {
-  padding-top: 56px;
+  padding-top: 10vh;
   padding-bottom: 100px;
   min-height: 100vh;
 }
@@ -32,6 +32,7 @@ footer {
 }
 
 .custom-width{
+  
   max-width: 80%;
   margin: 0 auto;
 }
@@ -45,8 +46,7 @@ footer {
 }
 
 .logo {
-  max-width: 20%;
-  height: auto;
+  max-width: 10vh;
 }
 
 .card{
@@ -62,8 +62,10 @@ footer {
   color: inherit !important;
 }
 
+
+/* Page Quizz */
 #quizz {
-  width: 50%;
+  width: 80%;
   padding: 1%;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -72,6 +74,9 @@ footer {
 }
 .question {
   margin-bottom: 10px;
+  max-width: 100%;
+  overflow: auto;
+  padding: 10px;
 }
 #quizz label {
   display: inline-block;

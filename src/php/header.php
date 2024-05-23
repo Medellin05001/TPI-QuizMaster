@@ -2,25 +2,8 @@
     ETML 
     Auteur	  	> Alexandre Fernandes 
     Date		    > 03.05.2024
-    Description > header, liaison avec divers script, css qui permettent le bon fonctionnement de l'application
+    Description > Contient toute la NavBar
 -->
-
-<?php 
-  //Insertion des cookies et démarrage d'un session php
-  ini_set('session.cookie_lifetime', 60 * 60 * 24 * 365);
-  ini_set('session.gc-maxlifetime', 60 * 60 * 24 * 365);
-  session_start();
-?>
-<head>
-    <meta charset="utf-8" /> 
-    <!-- Connexion au CSS local-->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/general.css">
-    <!-- Nécessaire pour le responsive design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Connexion à bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel = "icon" href ="resources/images/favIcon.png" type = "image/x-icon">
-</head>
 <?php
     // Vérifie si l'utilisateur est connecter
     if(isset($_SESSION["login"])){
@@ -35,9 +18,8 @@
 
 <!-- La balise nav ci-dessous est affichée (Si utilisateur connecté) -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-width">
-  <div class="container">
   <a class="navbar-brand" href="accueil.php"><img class="logo" src="resources/images/logo.png"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -65,14 +47,7 @@
         </li>
       </ul>
     </div>
-  </div>
 </nav>
 <?php
     }
 ?>
-<!-- Nécessaire pour le bon fonctionnement de bootstrap & liaison à jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Connexion au script javascript local-->
-<script src="src/js/script.js"></script>

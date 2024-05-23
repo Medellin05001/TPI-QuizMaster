@@ -4,10 +4,10 @@
     Date		    > 03.05.2024
     Description > Page d'inscription
 -->
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<?php require("src/php/head.php"); ?>
+  <title>Inscription</title>
+</head>
+<body>
   <?php 
       require("src/php/header.php");
       //Si l'utilsateur est déja connecté il est redirigé
@@ -19,11 +19,6 @@
         <?php
       }
   ?>
-  <meta charset="UTF-8">
-  <title>Inscription</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.css" integrity="sha512-whyb3qZrPEJNH+Z7P4YpD27cQ4C44kFZxqrmlNVxNB13HZlB0qJ0Xv1LKshWjGjZGtPAf+W/J+aEck5FmCf/kw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</head>
-<body>
 
   <!-- Formulaire d'inscription -->
   <div class="container mt-5">
@@ -69,9 +64,6 @@
       </div>
     </div>
   </div>
-</body>
-
-<footer>
   <?php require("src/html/footer.html"); ?>
-</footer>
+</body>
 </html>

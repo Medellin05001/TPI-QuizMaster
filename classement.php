@@ -4,9 +4,10 @@
     Date		> 06.05.2024
     Description > Page de classement
 -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<?php require("src/php/head.php"); ?>
+<title>Classement</title>
+</head>
+<body>
     <?php 
         require("src/php/header.php");
         //Si l'utilsateur n'est pas connecté il est redirigé
@@ -17,15 +18,10 @@
                 </script>
             <?php
         }
-    ?>
-  <meta charset="UTF-8">
-  <title>Classement</title>
-</head>
-<body>
-    <?php
-    // Données à afficher dans le tableau
-    $ranking = $db->getRanking();
-    $counter = 0;
+        require("src/php/header.php");
+        // Données à afficher dans le tableau
+        $ranking = $db->getRanking();
+        $counter = 0;
     ?>
     
     <div class="container">
@@ -71,9 +67,6 @@
             </table>
         </div>
     </div>
-        
+    <?php require("src/html/footer.html"); ?> 
 </body>
-<footer>
-  <?php require("src/html/footer.html"); ?>
-</footer>
 </html>

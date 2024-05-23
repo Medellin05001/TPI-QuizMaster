@@ -4,9 +4,10 @@
     Date		> 08.05.2024
     Description > Page de quizz
 -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<?php require("src/php/head.php"); ?>
+    <title>Quizz</title>
+</head>
+<body>
     <?php 
         require("src/php/header.php");
         //Si l'utilsateur n'est pas connecté il est redirigé
@@ -35,10 +36,6 @@
             exit;
         }
     ?>
-  <meta charset="UTF-8">
-  <title>Quizz</title>
-</head>
-<body>
     <h2 class="text-center mb-4"><?php echo($quizz[0]['quiTitre'])?> </h2>
     <div id="quizz-container">
         <!-- Form après réponses-->
