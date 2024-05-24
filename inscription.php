@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <h2 class="text-center mb-4">Inscription</h2>
-        <form action="src/php/inscriptionSystem.php" method="POST">
+        <form action="#" method="POST">
           <div class="form-group">
             <div class="row">
               <div class="col">

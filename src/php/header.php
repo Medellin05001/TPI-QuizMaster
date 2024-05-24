@@ -35,6 +35,9 @@
         <li class="nav-item <?php if($file == 'creationQuizz.php'){echo " active";}?>">
           <a class="nav-link" href="creationQuizz.php">Créer quizz</a>
         </li>
+        <li class="nav-item <?php if($file == 'listeUtilisateurs.php'){echo " active";}?>">
+          <a class="nav-link" href="listeUtilisateurs.php">liste Utilisateurs</a>
+        </li>
         <?php
         }
         ?>

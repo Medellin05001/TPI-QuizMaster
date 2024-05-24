@@ -32,9 +32,12 @@ footer {
 }
 
 .custom-width{
-  
   max-width: 80%;
   margin: 0 auto;
+}
+
+.text-center{
+  max-width: 100%;
 }
 
 .table-container {
@@ -62,6 +65,9 @@ footer {
   color: inherit !important;
 }
 
+#loginInput{
+  display: none;
+}
 
 /* Page Quizz */
 #quizz {

@@ -158,11 +158,92 @@ $(document).ready(function() {
         // Finalisations
         counter++;
     });
+
+    /**
+     * Traite les données du de modification d'utilisateur
+     */
+    $("#modificationSubmit").click(function(e) {
+        // Désactiver comportement du bouton pour pas qu'il redirige
+
+        e.preventDefault();
+        var validationInput = 0;
+
+        // Récupère le nom de famille introduit et vérifie s'il est correct
+        var nom = $("#nomInput").val();
+        if (nom == ""){
+            $("#erreur_nom").html("Veuillez entrer un nom !");
+        } else {
+            if(!nom.match(/^[a-zA-Z-]{3,50}$/)){
+                $("#erreur_nom").html("Le nom doit comporter au minimum 3 charactères et au maximum 50 (Lettres et \"-\" uniquement)!");
+            }else{
+                $("#erreur_nom").html("");
+                validationInput++;
+            }
+        }
+        
+        // Récupère le prenom introduit et vérifie s'il est correct
+        var prenom = $("#prenomInput").val();
+        if (prenom == "") {
+            $("#erreur_prenom").html("Veuillez entrer un prenom !");
+        } else {
+            if(!prenom.match(/^[a-zA-Z-]{3,35}$/)){
+                $("#erreur_prenom").html("Le prenom doit comporter au minimum 3 charactères et au maximum 35 (Lettres et \"-\" uniquement) !");
+            }else{
+                $("#erreur_prenom").html("");
+                validationInput++;
+            }
+        }
+
+        // Récupère le nom d'utilisateur
+        var login = $("#loginInput").text();
+
+        // Récupère le score de l'utilisateur introduit et vérifie s'il est correct
+        var score = $("#scoreInput").val();
+        if (score == "") {
+            $("#erreur_score").html("Veuillez entrer un score !");
+        } else {
+            if(score.match(/^(0|[1-9][0-9]{0,9}|1[0-9]{0,9}|2[0-9]{0,8}|21[0-3][0-9]{0,7}|214[0-6][0-9]{0,6}|2147[0-3][0-9]{0,5}|21474[0-7][0-9]{0,4}|214748[0-2][0-9]{0,3}|2147483[0-5][0-9]{0,2}|21474836[0-3][0-9]{0,1}|214748364[0-7])$/) && score <= 2147483647 && score >= 0){
+                $("#erreur_score").html("");
+                validationInput++;
+            }else{
+                $("#erreur_score").html("Le score doit être un chiffre, supérieur à 0 et inférieur à 2'147'483'647!");
+            }
+        }
+
+        // Récupère le score de l'utilisateur introduit et vérifie s'il est correct
+        var droit = $("#droitInput").val();
+        if (droit == "utilisateur" || droit == "admin") {
+            $("#erreur_nomUtilisateur").html("");
+            validationInput++;
+        }else{
+            $("#erreur_nomUtilisateur").html(droit);
+        }
+
+
+        // Si toutes les données introduites sont correctes, il les renvoies en paramètres POST dans la page qui gère tout la suite de l'inscription
+         if (validationInput === 4) {
+             $.ajax({
+                 method: "POST", 
+                 url: "src/php/modificationUtilisateur.php",
+                 data: { username: login, nom: nom, prenom: prenom, score: score, droit: droit }
+             })
+             .done(function(response) {
+                 $("#solde").html(response);
+             });
+         }
+    });
 });
 
-function question(id){
+function questionQuizz(id){
     if (confirm('Etes-vous sûr de vouloir supprimer ce quizz ?')) {
         //Si oui
         window.location.replace("src/php/suppressionQuizz.php?id="+id+"");
+      }
+}
+
+function questionUtilisateur(login){
+    if (confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ('+login+') ?')) {
+        //Si oui
+        window.location.replace("src/php/suppressionUtilisateur.php?id="+login+"");
       }
 }

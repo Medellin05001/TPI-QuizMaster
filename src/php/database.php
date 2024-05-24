@@ -53,6 +53,11 @@ class Database {
         return $this->formatData($statement);
     }
 
+    public function getAllUser(){
+        $users = $this->querySimpleExecute("SELECT * FROM t_utilisateurs");
+        return $this->formatData($users);
+    }
+
     /**
      * Créer l'utilisateur en fonction des données insérer
      * param $login => Le nom d'utilisateur
@@ -154,6 +159,68 @@ class Database {
             $this->connector->rollBack();
             throw $e;
         }
+    }
+
+    /**
+     * Permet de supprimer un utilisateur
+     * La fonction beginTransaction permet d'annuler toutes les opérations grâce à rollBack si un soucis est présent
+     * param $utilisateurId => id de l'utilisateur que l'on veut supprimer
+     */
+    public function deleteUser($utilisateurId){
+        try {
+            // Démarrer la transaction
+            $this->connector->beginTransaction();
+
+            // Supprimer les réponses associées aux questions de l'utilisateur
+            $query = "DELETE t_reponses FROM t_reponses 
+                      JOIN t_questions ON t_reponses.fkQuestions = t_questions.idQuestions 
+                      JOIN t_quizz ON t_questions.fkQuizz = t_quizz.idQuizz 
+                      WHERE t_quizz.fkUtilisateurs = :utilisateurId";
+            $binds = [['paramName' => 'utilisateurId', 'paramValue' => $utilisateurId, 'paramType' => PDO::PARAM_INT]];
+            $this->queryPrepareExecute($query, $binds);
+
+            // Supprimer les questions associées aux quiz de l'utilisateur
+            $query = "DELETE t_questions FROM t_questions 
+                      JOIN t_quizz ON t_questions.fkQuizz = t_quizz.idQuizz 
+                      WHERE t_quizz.fkUtilisateurs = :utilisateurId";
+            $this->queryPrepareExecute($query, $binds);
+
+            // Supprimer les quiz de l'utilisateur
+            $query = "DELETE FROM t_quizz WHERE fkUtilisateurs = :utilisateurId";
+            $this->queryPrepareExecute($query, $binds);
+
+            // Supprimer l'utilisateur
+            $query = "DELETE FROM t_utilisateurs WHERE idUtilisateurs = :utilisateurId";
+            $this->queryPrepareExecute($query, $binds);
+
+            // Valider la transaction
+            $this->connector->commit();
+        } catch (Exception $e) {
+            // Annuler la transaction en cas d'erreur
+            $this->connector->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Permet de modifier un utilisateur
+     * param $username => Login de l'utilisateur qui va subir la modification
+     * param $nom => Nouveau nom de famille
+     * param $prenom => Nouveau prenom
+     * param $score => Nouveau score
+     * param $droit => Nouveau droits sur l'appli web (admin, utilisateur)
+     */
+    public function updateUser($username, $nom, $prenom, $score, $droit){
+        $query = ("UPDATE `t_utilisateurs` SET `utiNom`=:nom, `utiPrenom`=:prenom, `utiDroits`=:droit, `utiScore`=:score WHERE `utiNomUtilisateur` = :username");
+        $binds = [
+            ["paramName" => "score", "paramValue" => $score, "paramType" => PDO::PARAM_INT],
+            ["paramName" => "username", "paramValue" => $username, "paramType" => PDO::PARAM_STR],
+            ["paramName" => "nom", "paramValue" => $nom, "paramType" => PDO::PARAM_STR],
+            ["paramName" => "prenom", "paramValue" => $prenom, "paramType" => PDO::PARAM_STR],
+            ["paramName" => "droit", "paramValue" => $droit, "paramType" => PDO::PARAM_STR]
+        ];
+        $statement = $this->queryPrepareExecute($query,$binds);
+        return $this->formatData($statement);
     }
 
     /**
