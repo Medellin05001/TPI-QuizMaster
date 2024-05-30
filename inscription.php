@@ -54,7 +54,7 @@
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary btn-block" name="submit" id="registerSubmit">Se connecter</button>
+          <button type="button" class="btn btn-primary btn-block" name="submit" id="registerSubmit">S'inscrire</button>
         </form>
         <div class="text-center mt-3">
           <p>Vous avez déjà un compte ?</p>
