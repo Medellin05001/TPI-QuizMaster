@@ -195,7 +195,7 @@ $(document).ready(function() {
         }
 
         // Récupère le nom d'utilisateur
-        var login = $("#loginInput").text();
+        var login = $("#loginInputModif").text();
 
         // Récupère le score de l'utilisateur introduit et vérifie s'il est correct
         var score = $("#scoreInput").val();

@@ -78,7 +78,7 @@
                 ?>
                 </select>
             </div>
-            <label type="text" class="form-control" id="loginInput" name="login"><?php echo $utilisateurSpecifique[0]['utiNomUtilisateur'] ?></label>
+            <label type="text" class="form-control" id="loginInputModif" name="login"><?php echo $utilisateurSpecifique[0]['utiNomUtilisateur'] ?></label>
             <button type="submit" class="btn btn-primary btn-block" name="submit" id="modificationSubmit">Modifier</button>
             <div style="color:red;" id="solde"></div>
         </form>
