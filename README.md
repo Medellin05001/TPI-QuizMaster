@@ -1,7 +1,7 @@
 # QuizMaster
 
 ## Mettre en place le projet
-1. Décompressez le dossier se trouvant dans le dossier "3. Projet", ouvrez le fichier START pour démarrer les différents serveurs.
+1. Décompressez le dossier "Y-TPI-AlexandreFernandes-quizMaster.zip" se trouvant dans le dossier "3. Projet", ouvrez le fichier START pour démarrer les différents serveurs.
 
 ## Importer données dans la base de données
 1. Pour importer les données, il suffit d’accéder à la page PhpmyAdmin.
