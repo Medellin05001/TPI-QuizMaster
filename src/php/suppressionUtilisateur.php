@@ -41,6 +41,7 @@
     }
     
 
+    // Si l'utilisateur existe bien, il est supprimer
     if($db->connect($NomUtilisateurUtilisateur)){
         $utilisateurSupprimer = $db->connect($NomUtilisateurUtilisateur);
         $db->deleteUser($utilisateurSupprimer[0]['idUtilisateurs']);

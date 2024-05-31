@@ -234,6 +234,10 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Demande à l'utilisateur une confirmation de suppresion du quiz
+ * param id => id du quizz à supprimer
+ */
 function questionQuizz(id){
     if (confirm('Etes-vous sûr de vouloir supprimer ce quizz ?')) {
         //Si oui
@@ -241,6 +245,10 @@ function questionQuizz(id){
       }
 }
 
+/**
+ * Demande à l'utilisateur une confirmation d'utilisateur
+ * param login => nom d'utilisateur de l'utilisateur à supprimer
+ */
 function questionUtilisateur(login){
     if (confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ('+login+') ?')) {
         //Si oui

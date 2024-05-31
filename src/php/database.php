@@ -53,6 +53,9 @@ class Database {
         return $this->formatData($statement);
     }
 
+    /**
+     * Permet d'obtenir tout les utilisateurs de la base de donnée
+     */
     public function getAllUser(){
         $users = $this->querySimpleExecute("SELECT * FROM t_utilisateurs");
         return $this->formatData($users);

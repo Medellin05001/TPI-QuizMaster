@@ -35,6 +35,7 @@
     }
     
 
+    // Si le quiz existe il est supprimer
     if($db->getQuizz($idQuizz)){
         echo "Quizz supprimer avec succès";
         $db->deleteQuizz($idQuizz);

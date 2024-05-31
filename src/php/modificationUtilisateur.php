@@ -24,7 +24,7 @@
 
     // Vérifie si des données sont bien présentes
     if (isset($score) && isset($nom) && isset($prenom) && isset($droit)){
-        // Création de l'utilisateur et redirection
+        // Modification de l'utilisateur et redirection
         $db->updateUser($username, $nom, $prenom, $score, $droit);
         echo $redirection;
     }else{
